@@ -9,3 +9,4 @@ When you create a new subbranch you must create a markdown file for describing y
 
 ## Editing environment
 All coding is made in the virtual environment. You can create it in the terminal by typing `python -m venv venv`.
+After creating the virtual envirnonmet you should activate it. Go to the `venv\Scripts` folder and run Activat.ps1 script by typing `.\Activate`. Check that you are using python interpretter from virtual environment.
