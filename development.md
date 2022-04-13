@@ -7,5 +7,5 @@ Sub branches will be merged to the development branch after successfull review o
 ## Subbranching
 When you create a new subbranch you must create a markdown file for describing you module or component to other developpers. Name your file accordingly for example `mainwindow.md`.
 
-# Editing environment
+## Editing environment
 All coding is made in the virtual environment. You can create it in the terminal by typing `python -m venv venv`.
