@@ -18,7 +18,7 @@ Barcodes are SVG or PNG objects that have save() method for outputting files:
 ```python
 # Using functions
 
-# Set Writer options. A dictionary for the writer: height 5 mm text 1 mm from barcode fontsize 12
+# Set Writer options. A dictionary for the writer: height 5 mm, text 1 mm from barcode, fontsize 12
 writerOptions = setWriterOptions(5,1,12)
 
 # Product ID to encode
