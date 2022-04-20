@@ -77,7 +77,7 @@ if __name__ == '__main__':
     codeType = 'Code128'
     pictureType = 'SVG'
 
-    # Set Writer options. A dictionary for the writer
+    # Set Writer options. A dictionary values for the writer: height 5 mm, margin to text 1mm, text size 12 pt
     writerOptions = setWriterOptions(5,1,12)
     
     # Create Code 128 barcode as png file
