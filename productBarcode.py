@@ -83,6 +83,5 @@ if __name__ == '__main__':
     # Create Code 128 barcode as png file
     barCode = barCode2Image(productid, codeType, pictureType)
 
-    # Set Writer options
     # Save the file
     barCode.save('Barcode' + pictureType, writerOptions)
