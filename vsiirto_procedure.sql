@@ -16,6 +16,8 @@ LANGUAGE 'plpgsql' -- Functionality of the procedure in BODY section
 
 AS $ BODY $ -- Transaction 2 entries to accounting table: crediting and debiting warehouse accounts
 BEGIN
+
+-- Take a product from a warehouse
 INSERT INTO
 	varastotapahtuma (
 		arkistotunnus,
@@ -38,7 +40,8 @@ VALUES
 		asiakas,
 		v_henkilo
 	);
-
+	
+-- Put it into an other warehouse
 INSERT INTO
 	varastotapahtuma (
 		arkistotunnus,
