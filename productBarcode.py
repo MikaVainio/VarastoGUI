@@ -4,7 +4,6 @@
 # LIBRARIES AND MODULES TO IMPORT
 
 # Code 128 and EAN
-from csv import writer
 from barcode import Code128, ean
 
 # Writers to generate an image files. ImageWriter produces png and jpg files
