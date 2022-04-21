@@ -14,7 +14,7 @@ photo.py | Functions to handle videostream and adding view findet to stream
 Branch has several dependencies:
 
 | Library or Module | Installation command or remark | Needed for module |
-|---|---|--->
+|---|---|---|
 PyQT5 | `pip install pyqt5` | widgedGui.py and singleWindowGui.py
 OpenCV | `pip install opencv-python` | widgedGui.py and singleWindowGui.py
 qimage2ndarray | `pip install qimage2dnarray` | photo.py
