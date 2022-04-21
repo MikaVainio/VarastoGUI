@@ -18,6 +18,7 @@ class VideoThread(QThread):
     def run(self):
 
         # Create a videocapture object and set capture dimensions to 1280 x 720
+        # TODO: followind parameters of the camera must be read from preferences or fields of the UI
         videoStream = cv2.VideoCapture(1, cv2.CAP_DSHOW)
         videoStream.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         videoStream.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -81,7 +82,8 @@ class App(QtWidgets.QWidget):
             alarmWindow.setWindowTitle('Virheellinen tai puuttuva tuotekoodi')
             alarmWindow.setText('Tuotekoodissa on oltava vähintään 1 merkki!')
             alarmWindow.exec_()
-
+        # TODO: check for illegal characters in product code 
+        
     # Slot for receiving the video: signaled by videoThread
     @pyqtSlot(QImage) # @ decorator ie. function takes another function as argument and returns a function
     def setImage(self, image):
