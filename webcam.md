@@ -16,4 +16,5 @@ Module has several dependencies:
 |---|---|
 PyQT5 | `pip install pyqt5`
 OpenCV | `pip install opencv-python`
+qimage2ndarray | `pip install qimage2dnarray`
 photo | DIY module `photo.py`
