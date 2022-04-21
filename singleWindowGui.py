@@ -7,7 +7,6 @@ from PyQt5 import QtWidgets, uic # For the UI
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot # For creating multiple threads and signaling between UI and Video thread
 from PyQt5.QtCore import Qt # For image scaling
 from PyQt5.QtGui import QImage, QPixmap # For image handling
-# from PIL import ImageQt # For saving QLabel to file
 
 # SEPARATE THREAD FOR VIDEO CAPTURE
 class VideoThread(QThread):
@@ -37,7 +36,7 @@ class VideoThread(QThread):
 
 # APPLICATION CLASS FOR THE UI
 class App(QtWidgets.QWidget):
-    # Constructor for the UI
+    # CONSTRUCTOR
     def __init__(self):
         super().__init__()
 
@@ -48,44 +47,52 @@ class App(QtWidgets.QWidget):
         self.picture = self.productImage
         self.productCode = self.productId
         self.captureButton.setEnabled(True)
-        self.stillButton.setEnabled(True)
-
+        
         # Start Capture button signal to capture slot -> call capture function
         self.captureButton.clicked.connect(self.capture)
 
-        # Save image to a file 
+        # Save image to a file with still button 
         self.stillButton.clicked.connect(self.saveStill)
 
+        # Set the Window Title and initialize the UI
         self.title = 'OpenCV video in QT window'
         self.initUI()
 
-    # Capture video
+    # SLOTS
+
+    # Capture video: started by signal from captureButton
     def capture(self):
         # Create a thread for video
         videoThread = VideoThread(self)
         videoThread.changePixmap.connect(self.setImage)
         videoThread.start()
-
-    # Save curent frame as a png file
+        
+    # Save curent frame as a png file: started by signal from stillButton
     def saveStill(self):
         # Create a pixmap to be saved
-        #stillImage = ImageQt.fromqpixmap(self.picture.pixmap()) # Using PIL library
         stillImage = self.picture.pixmap()
-        stillImage.save('tuote.jpg', 'jpg')
+        fileName = self.productCode.text() + '.jpg'
+        if len(fileName) > 4:
+            stillImage.save(fileName, 'jpg')
+        else:
+            # Show error message about the file name
+            alarmWindow = QtWidgets.QMessageBox()
+            alarmWindow.setIcon(QtWidgets.QMessageBox.Critical)
+            alarmWindow.setWindowTitle('Virheellinen tai puuttuva tuotekoodi')
+            alarmWindow.setText('Tuotekoodissa on oltava vähintään 1 merkki!')
+            alarmWindow.exec_()
 
-    
-
-    # Slot for receiving the video 
+    # Slot for receiving the video: signaled by videoThread
     @pyqtSlot(QImage) # @ decorator ie. function takes another function as argument and returns a function
     def setImage(self, image):
         self.picture.setPixmap(QPixmap.fromImage(image))
         self.captureButton.setEnabled(False)
+        fileName = self.productCode.text() + '.jpg'
+        if len(fileName) > 4:
+            self.stillButton.setEnabled(True)
 
     def initUI(self):
         self.setWindowTitle(self.title)
-        # videoThread = VideoThread(self)
-        # videoThread.changePixmap.connect(self.setImage)
-        # videoThread.start()
         self.show()
 
 if __name__ == '__main__':
