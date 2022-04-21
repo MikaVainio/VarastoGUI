@@ -1,4 +1,4 @@
-# Vebcam branch
+# Webcam branch
 
 This branch is for developping a module for processing videostream from a webcam and it contains several files:
 
