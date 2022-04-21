@@ -7,6 +7,7 @@ This branch is for developping a module for processing videostream from a webcam
 videoWidget.ui | QT Designer file for the UI
 widgedGui.py | UI uses a separate Window to show the videostream
 singleWindowGui.py | The videostream is shown directly in QT UI and video processing is done in a separate thread
+phtot.py | Functions to handle videostream and adding view findet to stream
 
 ## Dependencies
 
