@@ -6,7 +6,9 @@ import sys # For accessing system parameters
 from PyQt5 import QtWidgets, uic # For the UI
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot # For creating multiple threads and signaling between UI and Video thread
 from PyQt5.QtCore import Qt # For image scaling
-from PyQt5.QtGui import QImage, QPixmap # For image handling
+from PyQt5.QtGui import QImage, QPixmap, QTransform # For image handling
+
+# GLOBAL VARIABLES
 
 # SEPARATE THREAD FOR VIDEO CAPTURE
 class VideoThread(QThread):
@@ -42,13 +44,17 @@ class App(QtWidgets.QWidget):
         super().__init__()
 
         # Load the ui file
-        uic.loadUi('videoWidget.ui', self)
+        uic.loadUi('videoWidgetv2.ui', self)
 
         # UI elements (Direct assignment to properties)
         self.picture = self.productImage
         self.productCode = self.productId
+        # self.camera = self.cameraIxSpinBox
+        self.preview = self.catalogPreview
         self.captureButton.setEnabled(True)
         
+        # Set the camera index
+        # self.camera.valueChanged.connect(self.setCamIx)
         # Start Capture button signal to capture slot -> call capture function
         self.captureButton.clicked.connect(self.capture)
 
@@ -60,6 +66,11 @@ class App(QtWidgets.QWidget):
         self.initUI()
 
     # SLOTS
+
+    # Set the camera index
+    '''def setCamIx(self):
+        camIx = self.camera.value()
+        print(camIx)'''
 
     # Capture video: started by signal from captureButton
     def capture(self):
@@ -73,8 +84,21 @@ class App(QtWidgets.QWidget):
         # Create a pixmap to be saved
         stillImage = self.picture.pixmap()
         fileName = self.productCode.text() + '.jpg'
+
+        # Check the length of the filename: must contain at least one chr and extension .jpg
         if len(fileName) > 4:
             stillImage.save(fileName, 'jpg')
+
+            # Read the file as pixmap for previewing
+            landscapePixmap = QPixmap(fileName)
+
+            # Transform the pixmap for the preview field (potrait)
+            transformation = QTransform() # Create transformation object
+            transformation.scale(0.5, 0.5) # Scale to half size
+            transformation.rotate(90) # Rotate to potrait
+            potraitPixmap = landscapePixmap.transformed(transformation) # Run the transformation
+            self.preview.setPixmap(potraitPixmap) # Set the label
+
         else:
             # Show error message about the file name
             alarmWindow = QtWidgets.QMessageBox()
