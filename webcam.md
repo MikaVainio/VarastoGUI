@@ -24,3 +24,6 @@ PyQT5 | `pip install pyqt5` | widgedGui.py and singleWindowGui.py
 OpenCV | `pip install opencv-python` | widgedGui.py and singleWindowGui.py
 qimage2ndarray | `pip install qimage2dnarray` | photo.py
 photo | DIY module `photo.py` | widgedGui.py
+productBarcode | DIY module `productBarcode` | singleWindowGui.py
+barcode | `pip install python-barcode` | productBarcode
+

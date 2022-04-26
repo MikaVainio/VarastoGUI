@@ -1,7 +1,6 @@
 # EXAMPLE OF QT APPICATION FOR TAKING PRODUCT IMAGES IN SEPARATE THREAD USING WEB CAMERA
 
 # LIBRARIES AND MODULES
-from types import CodeType
 import productBarcode
 import cv2 # For OpenCV video and picture manipulation
 import sys # For accessing system parameters
