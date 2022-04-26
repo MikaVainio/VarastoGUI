@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1068</width>
+    <width>935</width>
     <height>582</height>
    </rect>
   </property>
@@ -22,11 +22,14 @@
      <height>360</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Videokuva tuotteesta, sovita tuotteen koko siten, että se täyttää koko kehyksen. Nosta kameraa ylöspäin suuria esineitä kuvattaessa ja laske alaspäin pieniä esineitä kuvattaessa.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
    </property>
    <property name="text">
-    <string>Video</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="captureButton">
@@ -40,6 +43,14 @@
      <width>181</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>Käynnistä Video</string>
@@ -56,6 +67,14 @@
      <width>181</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>Ota Kuva</string>
@@ -75,11 +94,14 @@
      <pointsize>16</pointsize>
     </font>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tuotteen koodi: oma tai valmistajan EAN-koodi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="tuotekoodiLabel">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -101,6 +123,9 @@
      <height>320</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>Tuotekuvastoon tuleva kuva pienennettynä</string>
+   </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
    </property>
@@ -108,20 +133,7 @@
     <string>Tallennettu kuva</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>930</x>
-     <y>10</y>
-     <width>55</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Kamera</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="videokuvaLabel">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -134,14 +146,19 @@
     <string>Videokuva</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="tuoteLabel">
    <property name="geometry">
     <rect>
-     <x>770</x>
+     <x>714</x>
      <y>130</y>
-     <width>55</width>
-     <height>16</height>
+     <width>171</width>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Tuote</string>
@@ -150,20 +167,160 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="bcLabel">
    <property name="geometry">
     <rect>
-     <x>770</x>
+     <x>710</x>
      <y>480</y>
-     <width>61</width>
-     <height>16</height>
+     <width>181</width>
+     <height>61</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>Tuotekuvaston viivakoodi pienennettynä</string>
    </property>
    <property name="text">
     <string>Viivakoodi</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>220</y>
+     <width>601</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>3</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>330</y>
+     <width>601</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>3</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_3">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>130</y>
+     <width>20</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>3</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_4">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>130</y>
+     <width>20</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>3</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QFrame" name="viewFinderRect">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>130</y>
+     <width>601</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 0);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>3</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="saveToDbButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>480</y>
+     <width>641</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="toolTip">
+    <string>Tallentaa tuotekuvan ja viivakoodin tietokantaan</string>
+   </property>
+   <property name="text">
+    <string>Tallenna</string>
    </property>
   </widget>
  </widget>
@@ -177,7 +334,7 @@
   <connection>
    <sender>productId</sender>
    <signal>textEdited(QString)</signal>
-   <receiver>label_4</receiver>
+   <receiver>tuoteLabel</receiver>
    <slot>setText(QString)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -185,8 +342,8 @@
      <y>48</y>
     </hint>
     <hint type="destinationlabel">
-     <x>797</x>
-     <y>189</y>
+     <x>741</x>
+     <y>149</y>
     </hint>
    </hints>
   </connection>

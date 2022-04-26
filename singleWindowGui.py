@@ -1,6 +1,8 @@
 # EXAMPLE OF QT APPICATION FOR TAKING PRODUCT IMAGES IN SEPARATE THREAD USING WEB CAMERA
 
 # LIBRARIES AND MODULES
+from types import CodeType
+import productBarcode
 import cv2 # For OpenCV video and picture manipulation
 import sys # For accessing system parameters
 from PyQt5 import QtWidgets, uic # For the UI
@@ -51,7 +53,9 @@ class App(QtWidgets.QWidget):
         self.productCode = self.productId
         # self.camera = self.cameraIxSpinBox
         self.preview = self.catalogPreview
+        self.barCode = self.bcLabel
         self.captureButton.setEnabled(True)
+        self.saveToDbButton.setEnabled(False)
         
         # Set the camera index
         # self.camera.valueChanged.connect(self.setCamIx)
@@ -99,6 +103,28 @@ class App(QtWidgets.QWidget):
             potraitPixmap = landscapePixmap.transformed(transformation) # Run the transformation
             self.preview.setPixmap(potraitPixmap) # Set the label
 
+            # Create the barcode with options: type Code 128 and output format PNG
+            productId = self.productCode.text()
+            codeType = 'Code128'
+            pictureType = 'PNG'
+            
+            # Set Writer options. A dictionary values for the writer: height 5 mm, margin to text 1mm, text size 10 pt
+            writerOptions = productBarcode.setWriterOptions(5,1,10)
+    
+            # Create Code with given options
+            barCode = productBarcode.barCode2Image(productId, codeType, pictureType)
+
+            # Save the file
+            barCode.save(productId, writerOptions)
+
+            # Show it on the GUI
+            bcodeImage = QPixmap(productId + '.'+ pictureType) # Pixmap from the file
+            bcTransformation = QTransform() # Create transformation object
+            bcTransformation.scale(0.5, 0.5) # Set scale to half size
+            bcodeImage = bcodeImage.transformed(bcTransformation) # Do the transformation
+            self.barCode.setPixmap(bcodeImage) # Show on label
+            self.saveToDbButton.setEnabled(True)
+
         else:
             # Show error message about the file name
             alarmWindow = QtWidgets.QMessageBox()
@@ -107,7 +133,9 @@ class App(QtWidgets.QWidget):
             alarmWindow.setText('Tuotekoodissa on oltava vähintään 1 merkki!')
             alarmWindow.exec_()
         # TODO: check for illegal characters in product code 
-        
+
+    
+
     # Slot for receiving the video: signaled by videoThread
     @pyqtSlot(QImage) # @ decorator ie. function takes another function as argument and returns a function
     def setImage(self, image):
@@ -123,5 +151,6 @@ class App(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle('Fusion')
     mainwindow = App()
     app.exec_()
