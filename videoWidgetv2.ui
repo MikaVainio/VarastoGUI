@@ -130,7 +130,7 @@
     <enum>QFrame::Box</enum>
    </property>
    <property name="text">
-    <string>Tallennettu kuva</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="videokuvaLabel">

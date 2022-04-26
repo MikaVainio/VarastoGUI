@@ -57,8 +57,6 @@ class App(QtWidgets.QWidget):
         self.captureButton.setEnabled(True)
         self.saveToDbButton.setEnabled(False)
         
-        # Set the camera index
-        # self.camera.valueChanged.connect(self.setCamIx)
         # Start Capture button signal to capture slot -> call capture function
         self.captureButton.clicked.connect(self.capture)
 
@@ -83,7 +81,7 @@ class App(QtWidgets.QWidget):
         videoThread.changePixmap.connect(self.setImage)
         videoThread.start()
         
-    # Save curent frame as a png file: started by signal from stillButton
+    # Save curent frame as a JPG file: started by signal from stillButton
     def saveStill(self):
         # Create a pixmap to be saved
         stillImage = self.picture.pixmap()
