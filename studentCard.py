@@ -69,7 +69,7 @@ class App(QtWidgets.QWidget):
 
             # TODO: This should be tested with card printer with and without  HighResolution by using
             # printers own scaling options ie scale to fit found in print dialog. In the future put 
-            # scaling parameters (resolutininto UI's Options Menu
+            # scaling parameters (resolution into UI's Options Menu) Also check margins now 10 dots
 
             # Start creating an image to print from cardFrame in the UI
             painter.begin(printer) # Start the painter using the printer device
