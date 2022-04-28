@@ -2,13 +2,11 @@
 
 # LIBRARIES AND MODULES
 from fileinput import filename
-from tabnanny import check
 import productBarcode # Functions for barcodes
 import sys # For accessing system parameters
 import os # For directory and file handling
 from PyQt5 import QtWidgets, uic , QtPrintSupport # For the UI and printing
-from PyQt5.QtCore import Qt # For image scaling
-from PyQt5.QtGui import QImage, QPixmap, QTransform, QPainter # For image handling
+from PyQt5.QtGui import QPixmap, QTransform, QPainter # For image handling
 
 # CLASS DEFINITIONS
 
