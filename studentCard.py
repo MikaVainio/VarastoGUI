@@ -1,7 +1,6 @@
 # APPLICATION FOR CREATING AND PRINTING STUDENT CARDS
 
 # LIBRARIES AND MODULES
-from fileinput import filename
 import productBarcode # Functions for barcodes
 import sys # For accessing system parameters
 import os # For directory and file handling
