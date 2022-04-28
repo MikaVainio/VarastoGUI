@@ -55,7 +55,7 @@ class App(QtWidgets.QWidget):
         self.bCode.setPixmap(barCodePixmap)
 
         # Remove the temporary file
-        # os.remove('tmpbarcode.png')
+        os.remove('tmpbarcode.png')
 
     def printCard(self):
         # Create a printer object as painter device, High resolution printing
