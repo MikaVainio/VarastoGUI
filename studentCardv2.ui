@@ -39,7 +39,7 @@
     <string>Nimi</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="printButton">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -198,9 +198,9 @@
    <widget class="QLabel" name="studentBarcode">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>120</x>
       <y>740</y>
-      <width>481</width>
+      <width>331</width>
       <height>111</height>
      </rect>
     </property>
