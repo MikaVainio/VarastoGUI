@@ -10,6 +10,8 @@ The User types the student number into text edit Opiskelijanumero (1). Student i
 
 Previous picture is the original design. Some alterations has been made in the 2nd version `studentCardv2.ui`. There are some fields added so the user can type in student information. In the final version all font sizes should be carefully inspected. The size of the card is 86 x 54 mm. Propably RASEKO's VAT number and perhaps the course name are too small in that size.
 
+In the 2nd version all dynamic labels are bound to line edit elements by QTSignals. Singnals and slots are created graphically in the QTEditor.
+
 ![image](https://github.com/MikaVainio/VarastoGUI/blob/dev-studentcard/Opiskelijakorttisovellus.png)
 
 This branch has 2 python files  and 2 versions of UI file and most current files are:
