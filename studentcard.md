@@ -16,7 +16,7 @@ In the 2nd version all dynamic labels are bound to line edit elements by QTSigna
 
 ![image](https://github.com/MikaVainio/VarastoGUI/blob/dev-studentcard/Opiskelijakorttisovellus.png)
 
-This branch has 2 python files  and 2 versions of UI file and most current files are:
+This branch has 2 python files  and 2 versions of UI file. Most current files are:
 
 | Library or module | Purpose |
 |---|---|
