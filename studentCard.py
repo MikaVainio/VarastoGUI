@@ -84,7 +84,7 @@ class App(QtWidgets.QWidget):
         
         fileName, check = QtWidgets.QFileDialog.getOpenFileName(None)
         if fileName:
-            print(fileName)
+            
             studentPhoto = QPixmap(fileName)
             self.picture.setPixmap(studentPhoto)
 
