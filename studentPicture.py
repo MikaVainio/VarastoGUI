@@ -70,10 +70,9 @@ class App(QtWidgets.QWidget):
 
     # Capture video: started by signal from captureButton
     def capture(self):
-        # Create a thread for video
-        videoThread = VideoThread(self)
-        videoThread.changePixmap.connect(self.setImage)
-        videoThread.start()
+        videoThread = VideoThread(self) # Create a new thread object
+        videoThread.changePixmap.connect(self.setImage) # When signaled call slot function
+        videoThread.start() # Start the thread
         
     # Save and crop the curent frame as a JPG file: started by signal from stillButton
     def saveStill(self):
@@ -107,6 +106,7 @@ class App(QtWidgets.QWidget):
         self.setWindowTitle(self.title)
         self.show()
 
+# RUN THE APPLICATION
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv) # Create the application object
     app.setStyle('Fusion') # Set Window style to non native
