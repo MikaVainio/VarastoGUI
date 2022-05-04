@@ -16,13 +16,15 @@ In the 2nd version all dynamic labels are bound to line edit elements by QTSigna
 
 ![image](https://github.com/MikaVainio/VarastoGUI/blob/dev-studentcard/Opiskelijakorttisovellus.png)
 
-This branch has 2 python files  and 2 versions of UI file. Most current files are:
+This branch has 3 python files and 3 ui files. Most current files are:
 
 | Library or module | Purpose |
 |---|---|
 productBarcode.py | For generating and saving barcodes
 studentCard.py | Applications main module
 studentCardv2.ui | Current UI definitions for the app
+studentPicture.py | A small application for taking photos for the student card
+studentPicture.ui | UI for the photo taking application
 
 Some image files are needed for logos and as placeholders.
 
