@@ -31,3 +31,21 @@ Some image files are needed for logos and as placeholders.
 * Omakuva2.png -> placeholder for student photo
 * Raseko-logo-vaaka.png -> The logo of our school
 
+# Distribution
+
+For distributing applications we need the `PyInstaller` library. It can be installed into the virtual environment `pip install PyInstaller`. Applications for this branch use quite many external libraries so it is not vise to distiribute the application in single standalone `exe` file. With separate `dll` link libraries the file size of the exe's file size is much smaller thus there are many files in the distribution directory. When creating an application with a separate `ui` file it is essential to copy manually the `ui` file into `dist` folder. `PyInstaller` does not copy it and running the `exe` fails.
+
+## Single container application 
+To create single container application run the following command `PyInstaller --onefile main.py` where the `main.py` is the name of the file containing the main window definition. This command creates a large `exe` file containing all components of the application
+
+## Application and separate libraries
+
+In Our case commands are:
+* `PyInstaller --windowed studentPicture.py`
+* `PyInstaller --windowed studentCard.py`
+
+Building executables creates several files to `build` folder. The executable and necessary `dll` files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory.
+
+| File | Directory | Purpose |
+|---|---|---|
+
