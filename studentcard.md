@@ -46,6 +46,13 @@ In Our case commands are:
 
 Building executables creates several files to `build` folder. The executable and necessary `dll` files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory.
 
-| File | Directory | Purpose |
-|---|---|---|
+| File and path| Purpose |
+|---|---|
+dist\studentPicture\studentPicture.exe | Executable to run picture taking application
+dist\studentPicture\studentPotrait.ui | Ui file manually copied to this folder
+dist\studentCard\studentCard.exe | Executable to run card printing application
+dist\studentCard\studentCardv2.ui |  Ui file manually copied to this folder
+studentPicture.spec | Settings for building picture taking application
+studentCard.spec | Settings for building picture taking application
 
+If python console is needed it can be enabled by editing `spec` file and altering `exe = EXE()` block. Change console option to `console=True`
