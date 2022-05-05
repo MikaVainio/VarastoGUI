@@ -59,4 +59,4 @@ studentCard.spec | Settings for building picture taking application
 
 If python console is needed it can be enabled by editing `spec` file and altering `exe = EXE()` block. Change console option to `console=True`
 
-:warning: Windows Defender might claim that there is a trojan in the executable. This is a known false positive. Most of schools computers have FSecure Safe as malware detection software. It does not give any alerts concerning the executable. Defender users may find this article useful: https://python.plainenglish.io/pyinstaller-exe-false-positive-trojan-virus-resolved-b33842bd3184.
+:warning: Windows Defender might claim that there is a trojan in the executable. This is a known false positive. Most of computers in the school have FSecure Safe as malware detection software. It does not give any alerts concerning the executable. Defender users may find this article useful: https://python.plainenglish.io/pyinstaller-exe-false-positive-trojan-virus-resolved-b33842bd3184.
