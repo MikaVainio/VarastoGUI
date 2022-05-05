@@ -46,7 +46,7 @@ In Our case commands are:
 
 Building executables creates several files to `build` folder. The executable and necessary `dll` files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory.
 
-:warning: When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder. If you create modules they must reside in the libs folder of the virtual environment.
+:warning When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder. If you create modules they must reside in the libs folder of the virtual environment.
 
 | File and path| Purpose |
 |---|---|
