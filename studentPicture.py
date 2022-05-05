@@ -22,7 +22,7 @@ class VideoThread(QThread):
         # Mika's work computer cameras 0:Cannon, 1:ThinkPad Internal, 2:Logitech external
         # Cam indexes may shift ie 1 can be external and 2 internal when external cam is
         # unplugged and plugged again wihtout booting the computer. Cannon is always 0
-        videoStream = cv2.VideoCapture(2, cv2.CAP_DSHOW)
+        videoStream = cv2.VideoCapture(1, cv2.CAP_DSHOW)
         videoStream.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         videoStream.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
