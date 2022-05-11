@@ -1,8 +1,17 @@
 
 def string2barcode(text, codeType, fontShift):
+    """Generates a Code 128 barcode from given text string. For Libre 128 barcode font
+    Args:
+        text (str): The text to be encoded into a barcode
+        codeType (str, optional): Version of the barcode. Defaults to 'B'.
+        fontShift (str, optional): Character set used in the text string. Defaults to 'common'.
+
+    Returns:
+        str: character string presentation of the barcode
+    """
     startCodeList = {'A' : 103, 'B' : 104, 'C' : 105} # Value of the start symbol in different variations
     fontPositionList = {'common' : 100, 'uncommon' : 105, 'barcodesoft' : 145} # Systems for presentingstart and stop symbols
-    addedValue = fontPositionList.get(fontShift) # Get a value to shift symbols in the font
+    addValue = fontPositionList.get(fontShift) # Get a value to shift symbols in the font
     startSymbolValue = startCodeList.get(codeType) # Choose start symbol value according to code type A, B or C
     stopSymbolValue = 106 # Allways 106
     stringToCode = text # A srting to be encoded into barcode
@@ -17,15 +26,15 @@ def string2barcode(text, codeType, fontShift):
         if ord(character) < 127:            
             bCValue = ord(character) -32 # < 127 Original 7 bit ASCII allways subtract 32
         else:
-            bCValue = ord(character) - addedValue # 8 bit charater subtract according to font shifting table
+            bCValue = ord(character) - addValue # 8 bit charater subtract according to font shifting table
 
         weightedSum += bCValue * cntr # Calculate the position weighted sum
 
     chksum = weightedSum % 103 # Calculate modulo 103 checksum
 
     # Build barcode 
-    startSymbol = chr(startSymbolValue + addedValue) # Create a start symbol accordint ot the type
-    stopSymbol = chr(stopSymbolValue + addedValue) # Create a stop symbol
+    startSymbol = chr(startSymbolValue + addValue) # Create a start symbol accordint ot the type
+    stopSymbol = chr(stopSymbolValue + addValue) # Create a stop symbol
     chkSymbol = chr(chksum + 32) # Create the checksum symbol
     barCode = startSymbol + stringToCode + chkSymbol + stopSymbol
     return barCode
