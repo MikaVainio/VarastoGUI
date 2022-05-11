@@ -198,17 +198,26 @@
    <widget class="QLabel" name="studentBarcode">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>740</y>
-      <width>331</width>
-      <height>111</height>
+      <x>50</x>
+      <y>760</y>
+      <width>441</width>
+      <height>131</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Libre Barcode 128</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string/>
+     <string>ÌJonne^Î</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="logoLabel">
@@ -661,6 +670,9 @@ color: rgb(237, 46, 128);</string>
     <font>
      <pointsize>14</pointsize>
     </font>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

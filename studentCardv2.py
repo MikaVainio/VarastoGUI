@@ -2,8 +2,6 @@
 # ---------------------------------------------------
 
 # LIBRARIES AND MODULES
-from barcode import Code128, ean # For creating bar codes
-from barcode.writer import ImageWriter, SVGWriter # Writers to generate an image files from bar codes
 import sys # For accessing system parameters
 import os # For directory and file handling
 from PyQt5 import QtWidgets, uic , QtPrintSupport # For the UI and printing
@@ -36,25 +34,14 @@ class App(QtWidgets.QWidget):
         self.initUI()
 
     # Slots
+
+    # Generate barcode from the student id
     def setBarcode(self):
-         # Student ID to encode
         id = self.student.text()
-        codeType = 'Code128'
-        pictureType = 'PNG'
+        barCode = string2barcode(id)
+        self.bCode.setText(barCode)
+        
 
-        # Set Writer options. Height 5 mm, text 1 mm from code, text 8 pt
-        writerOptions = setWriterOptions(5,1,8)
-    
-        # Create Code 128 barcode and save it into a temporary file
-        barCode = barCode2Image(id, codeType, pictureType)
-        tempBarcode = barCode.save('tmpbarcode', writerOptions)
-
-        # Draw the barcode
-        barCodePixmap = QPixmap(tempBarcode)
-        self.bCode.setPixmap(barCodePixmap)
-
-        # Remove the temporary file
-        os.remove('tmpbarcode.png')
 
     def printCard(self):
         # Create a printer object as painter device, High resolution printing
@@ -96,65 +83,53 @@ class App(QtWidgets.QWidget):
         self.setWindowTitle(self.title)
         self.show()
 
-# FUNCTIONS FOR GENERATING BAR CODES        
+# FUNCTIONS FOR GENERATING BARCODES   
 
-def barCode2Image(productId, codeType='Code128', pictureType='PNG'):
-        """Creates image of barcode from a string. Funtion supports Code 128 and EAN 13
+def string2barcode(text, codeType='B', fontShift='common'):
+    """Generates a Code 128 barcode from given text string. For Libre 128 barcode font
+    Args:
+        text (str): The text to be encoded into a barcode
+        codeType (str, optional): Version of the barcode. Defaults to 'B'.
+        fontShift (str, optional): Character set used in the text string. Defaults to 'common'.
 
-        Args:
-        productId (str): String which will be encoded into a barcode
-        codeType (str, optional): Type of the barcode. Defaults to 'Code128'.
-        pictureType (str, optional): Type of image. Defaults to 'PNG'.
+    Returns:
+        str: character string presentation of the barcode
+    """
+    
+    
+    startCodeList = {'A' : 103, 'B' : 104, 'C' : 105} # Value of the start symbol in different variations
+    fontPositionList = {'common' : 100, 'uncommon' : 105, 'barcodesoft' : 145} # Systems for presentingstart and stop symbols
+    addedValue = fontPositionList.get(fontShift) # Get a value to shift symbols in the font
+    startSymbolValue = startCodeList.get(codeType) # Choose start symbol value according to code type A, B or C
+    stopSymbolValue = 106 # Allways 106
+    stringToCode = text # A srting to be encoded into barcode
+    cntr = 0 # Se counter to 0
+    weightedSum = startSymbolValue # Add the value of the start symbol to weighted value
 
-        Returns:
-        object: image object
-        """
-        # Create a PNG file
-        if pictureType == 'PNG':
+    # Handle all characters in the string
+    for character in stringToCode:
+        cntr += 1
 
-            # Check the barcode type
-            if codeType == 'Code128':
-
-                # Create Code 128 barcode in RGB Color space (no transparency)
-                bCodeImage = Code128(
-                productId, writer=ImageWriter(pictureType, 'RGB'))
-            else:
-                # Create EAN 13 barcode in RGB Colour space
-                bCodeImage = ean.EuropeanArticleNumber13(
-                    productId, writer=ImageWriter(pictureType, 'RGB'), no_checksum=False)
-
-        # Create a SVG file
+        # Check if character more or less than or equal to 126
+        if ord(character) < 127:            
+            bCValue = ord(character) -32 # < 127 Original 7 bit ASCII allways subtract 32
         else:
-            # Check the barcode type
-            if codeType == 'Code128':
+            bCValue = ord(character) - addedValue # 8 bit charater subtract according to font shifting table
 
-                # Create Code 128 barcode
-                bCodeImage = Code128(productId, writer=SVGWriter())
-            else:
-                # Create EAN 13 barcode
-                bCodeImage = ean.EuropeanArticleNumber13(
-                    productId, writer=SVGWriter, no_checksum=False)
+        weightedSum += bCValue * cntr # Calculate the position weighted sum
 
-        return bCodeImage
+    chksum = weightedSum % 103 # Calculate modulo 103 checksum
 
-    # Function to define barcode dimensions and the font size
-def setWriterOptions(height=7, textDistance=2, fontSize=10):
-        """Creates a dictionary for pyhton-barcode Writer
-
-        Args:
-            height (int, optional): Height of the barcode in mm. Defaults to 7.
-            textDistance (int, optional): Distance between bars and plain text presentation in mm. Defaults to 2.
-            fontSize (int, optional): Size of the plain text in pt. Defaults to 10.
-
-        Returns:
-            dict: Barcode Writer Options 
-        """
-        writerOptions = {'module_height' : height, 'text_distance' : textDistance, 'font_size' : fontSize}
-        return writerOptions
+    # Build barcode 
+    startSymbol = chr(startSymbolValue + addedValue) # Create a start symbol accordint ot the type
+    stopSymbol = chr(stopSymbolValue + addedValue) # Create a stop symbol
+    chkSymbol = chr(chksum + 32) # Create the checksum symbol
+    barCode = startSymbol + stringToCode + chkSymbol + stopSymbol
+    return barCode
+    
 
 
-
- # CREATING AND STARTING THE APPLICATION  
+# CREATING AND STARTING THE APPLICATION  
             
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
