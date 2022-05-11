@@ -20,8 +20,8 @@ This branch has 3 python files and 3 ui files. Most current files are:
 
 | Library or module | Purpose |
 |---|---|
-productBarcode.py | For generating and saving barcodes
-studentCard.py | Applications main module
+code128Bcode.py | For generating barcodes with Libre 128 Barcode font
+studentCard.py | Applications main module, contains functions in code128Bcode.py
 studentCardv2.ui | Current UI definitions for the app
 studentPicture.py | A small application for taking photos for the student card
 studentPicture.ui | UI for the photo taking application
