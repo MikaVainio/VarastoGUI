@@ -196,10 +196,10 @@ coll = COLLECT(
 
 ```
 
-## Distribution
-Applications can be distributed with or without an installer. When used without installer contents of the distribution folder are copied to the other computer. Some of the files are shown in the picture below:
+## Installer
+Applications can be distributed with or without an installer. When used without an installer contents of the distribution folder are copied to the other computer. Some of the files are shown in the picture below:
 
 ![image](https://user-images.githubusercontent.com/24242044/168031298-51e47538-b4a7-4a97-9837-cc349822a9e7.png)
 
-
+Distribution can be made with zipped folder containinf installation instructions and contents of the distribution folder. Creating an installer is more sophisticated way of delivering the application to a client.
 
