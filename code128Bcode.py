@@ -31,7 +31,6 @@ def string2barcode(text, codeType, fontShift):
         weightedSum += bCValue * cntr # Calculate the position weighted sum
 
     chksum = weightedSum % 103 # Calculate modulo 103 checksum
-    print('varmistussumma', chksum)
 
     # Build barcode 
     startSymbol = chr(startSymbolValue + addValue) # Create a start symbol accordint ot the type
