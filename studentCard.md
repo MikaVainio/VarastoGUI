@@ -12,7 +12,7 @@ Previous picture is the original design. Some alterations has been made in the 2
 
 In the final version all font sizes should be carefully inspected. The size of the card is 86 x 54 mm. Propably RASEKO's VAT number and perhaps the course name are too small in that size. Printing can be done with high resolution or normal printer settings. When high resolution printing is used the size of preview frame (# 4 in the first picture) must be scaled approximately 2.5 times for correct print size. If normal printing is used scaling factor is 0.3. Final values depend on resolutions of the monitor and the card printer. Typically the monitor resolution is 96 dpi and the printing resolution 300 dpi.
 
-In the 2nd version all dynamic labels are bound to line edit elements by QTSignals. Singnals and slots are created graphically in the QTEditor.
+In the 2nd version all dynamic labels are bound to line edit elements by QTSignals. Singnals and slots are created graphically in the QTEditor. Both buttons have dedicated slots defined in the code using `openPicture(self)` and `printCard(self)` functions. Barcode is generated alfter user has pressed the Hae Kuva button. This button is activated when there is a student number in the line edit. After printing student's personal information is cleared. Season and study information is kept for next student card to be created.
 
 ![image](https://user-images.githubusercontent.com/24242044/168024527-d5bbd408-cdee-4e93-9e60-8cba515e9fc5.png)
 
