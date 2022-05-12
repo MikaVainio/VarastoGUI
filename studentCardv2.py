@@ -21,23 +21,40 @@ class App(QtWidgets.QWidget):
 
         # UI elements 
         self.bCode = self.studentBarcode
-        self.student = self.studentNumberEdit
+        self.studentId = self.studentNumberEdit
         self.picture = self.pictureLabel
+        self.nameInput = self.studentName
+        self.birth = self.dateOfBirth
+        self.study = self.studyName
+        self.year = self.season
+        self.loadPictureButton.setEnabled(False)
 
         # Signals
-        # self.student.textEdited.connect(self.setBarcode)
-        self.printButton.clicked.connect(self.printCard)
-        self.loadPictureButton.clicked.connect(self.openPicture)
-
+        self.studentId.textEdited.connect(self.starProcessing) # When edited activate Open Picture button
+        self.loadPictureButton.clicked.connect(self.openPicture) # When clicked open Load Picture dialog
+        self.printButton.clicked.connect(self.printCard) # When clicked print card and clear personal information
+        
         # Set the Window Title and initialize the UI
         self.title = 'Opiskelijakortti'
         self.initUI()
 
     # Slots
 
+    def starProcessing(self):
+        self.loadPictureButton.setEnabled(True)
+
+    def stopProcessing(self):
+        self.loadPictureButton.setEnabled(False) # Disable loadpicture button
+        # Clear all personal information but keep the course name and the season 
+        self.studentId.clear()
+        self.nameInput.clear()
+        self.birth.clear()
+
+        
+
     # Generate barcode from the student id
     def setBarcode(self):
-        id = self.student.text()
+        id = self.studentId.text()
         barCode = string2barcode(id)
         self.bCode.setText(barCode)
         
@@ -69,9 +86,15 @@ class App(QtWidgets.QWidget):
             painter.drawPixmap(10, 10, sizedCard) # Create a pixmap to print
             painter.end() # Close the priter
 
+            # Disable Load Picture Button
+            self.stopProcessing()
+
     def openPicture(self):
-        
-        fileName, check = QtWidgets.QFileDialog.getOpenFileName(None)
+        relativeWorkingDirectory = '\Pictures'
+        # Get users profile path and join it with Pictures folder's path
+        userProfilePath = os.path.expanduser('~')
+        workingDirectory = userProfilePath + relativeWorkingDirectory
+        fileName, check = QtWidgets.QFileDialog.getOpenFileName(None, 'Valitse kuva', workingDirectory, 'Kuvatiedostot (*.jpg *.png)')
         if fileName:
             
             studentPhoto = QPixmap(fileName)
@@ -96,7 +119,6 @@ def string2barcode(text, codeType='B', fontShift='common'):
         str: character string presentation of the barcode
     """
     
-    
     startCodeList = {'A' : 103, 'B' : 104, 'C' : 105} # Value of the start symbol in different variations
     fontPositionList = {'common' : 100, 'uncommon' : 105, 'barcodesoft' : 145} # Systems for presentingstart and stop symbols
     addedValue = fontPositionList.get(fontShift) # Get a value to shift symbols in the font
@@ -120,7 +142,7 @@ def string2barcode(text, codeType='B', fontShift='common'):
 
     chksum = weightedSum % 103 # Calculate modulo 103 checksum
 
-    # Build barcode 
+    # Build the barcode 
     startSymbol = chr(startSymbolValue + addedValue) # Create a start symbol accordint ot the type
     stopSymbol = chr(stopSymbolValue + addedValue) # Create a stop symbol
     chkSymbol = chr(chksum + 32) # Create the checksum symbol

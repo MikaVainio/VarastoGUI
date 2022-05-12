@@ -4,6 +4,7 @@
 # LIBRARIES AND MODULES
 import cv2 # For OpenCV video and picture manipulation for reading Web camera
 import sys # For accessing system parameters
+import os # For file paht handling
 from PyQt5 import QtWidgets, uic # For the UI
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot # For creating multiple threads and signaling between UI and Video thread
 from PyQt5.QtCore import Qt, QRect # For image scaling and cropping
@@ -76,17 +77,21 @@ class App(QtWidgets.QWidget):
         
     # Save and crop the curent frame as a JPG file: started by signal from stillButton
     def saveStill(self):
+        relativeWorkingDirectory = '\Pictures'
+        # Get users profile path and join it with Pictures folder's path
+        userProfilePath = os.path.expanduser('~')
+        workingDirectory = userProfilePath + relativeWorkingDirectory
         stillImage = self.picture.pixmap() # Create a pixmap to be saved
         transformation = QTransform() # Create a transformation object
         transformation.scale(0.5, 0.5) # Set scale for transformation object
         scaledImage = stillImage.transformed(transformation) # Run the transformation
         cropArea = QRect(0, 0, 360, 360) # Define cropping box
         squarePixmap = scaledImage.copy(cropArea) # Copy the cropped image pixels
-        fileName = self.student.text() + '.jpg' # Create a filenane and add extension
-
+        fileName = self.student.text() + '.jpg' # File name is the student number
+        fullPathFileName = os.path.join(workingDirectory, fileName) # Build a path to the file in Pictures folder
         # Check the length of the filename: must contain at least one chr and extension .jpg
         if len(fileName) > 4:
-            squarePixmap.save(fileName, 'jpg')
+            squarePixmap.save(fullPathFileName, 'jpg')
             # Read the file as pixmap for previewing
             self.preview.setPixmap(squarePixmap) # Set the label
 
