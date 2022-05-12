@@ -64,7 +64,7 @@ In Our case commands are:
 
 Building executables creates several files to `build` folder. The executable and necessary `dll` files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory. It is handy to give build commands without `--windwed` argument. Then you have Python console for debugging. When everything works as expected we can edit the `.spec` file and set `console=False` in the `EXE` part of the file.
 
-:warning: When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder in the first build of your application. If you create modules they must reside in the libs folder of the virtual environment. Alfter 1st build you can edit the `.spec` file.
+:warning: When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder in the first build of your application. If you create modules they must eithe reside in the libs folder of the virtual environment or you must add python modules into the `.spec` file. Alfter 1st build you can edit the created `.spec` file. When you have a `.spec` file you can build with command `PyInstaller studentipicture.spec` or what ever is your build specification file.
 
 | File and path| Purpose |
 |---|---|
