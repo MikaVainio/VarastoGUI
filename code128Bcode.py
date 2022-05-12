@@ -36,11 +36,14 @@ def string2barcode(text, codeType, fontShift):
     # Build barcode 
     startSymbol = chr(startSymbolValue + addValue) # Create a start symbol accordint ot the type
     stopSymbol = chr(stopSymbolValue + addValue) # Create a stop symbol 
+
     # Create the checksum symbol
     if chksum < 95:
         chkSymbol = chr(chksum + 32) # Add 32 if value < 95
     else:
-        chkSymbol = chr(chksum + addValue)
+        chkSymbol = chr(chksum + addValue) # Add shift according to the character set used
+    
+    # Build and return the final barcode string
     barCode = startSymbol + stringToCode + chkSymbol + stopSymbol
     return barCode
     
