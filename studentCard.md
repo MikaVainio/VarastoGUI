@@ -25,6 +25,7 @@ studentCardv2.py |	Applications main module, contains function in code128Bcode.p
 studentCardv2.ui |	Current UI definitions for the app
 studentPicture.py |	A small application for taking photos for the student card
 studentPicture.ui | UI for the photo taking application
+
 Some image files are needed for logos and as placeholders.
 
 * Omakuva2.png -> placeholder for student photo
