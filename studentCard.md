@@ -1,4 +1,5 @@
-#Studentcard
+# Studentcard
+
 This branch is for developping a stand alone GUI and an application for creating and printing student cards with a specialized card printer.
 
 The GUI is designed as follows:
