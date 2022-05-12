@@ -16,11 +16,11 @@ In the 2nd version all dynamic labels are bound to line edit elements by QTSigna
 
 ![image](https://user-images.githubusercontent.com/24242044/168024527-d5bbd408-cdee-4e93-9e60-8cba515e9fc5.png)
 
-This branch has 3 python files and 3 ui files. Most current files are:
+This branch has 3 python files and 2 ui files. Most current files are:
 
 | Library or module | Purpose |
 |---|---|
-code128Bcode.py |	For generating barcodes with Libre 128 Barcode font
+code128Bcode.py |	For generating barcodes with Libre 128 Barcode font, included in studentCardv2.py
 studentCardv2.py |	Applications main module, contains function in code128Bcode.py
 studentCardv2.ui |	Current UI definitions for the app
 studentPicture.py |	A small application for taking photos for the student card
@@ -76,3 +76,119 @@ studentCardv2.spec | Settings for building picture taking application
 If python console is needed it can be enabled by editing `.spec` file and altering `exe = EXE()` block. Change console option to `console=True`.
 
 ⚠️ Windows Defender might claim that there is a trojan in the executable. This is a known false positive. Most of computers in the school have FSecure Safe as malware detection software. It does not give any alerts concerning the executable. Defender users may find this article useful: https://python.plainenglish.io/pyinstaller-exe-false-positive-trojan-virus-resolved-b33842bd3184.
+
+## Spec files
+`.spec` files are ignored by git. Full build specifications are as follows:
+
+### studentPicture.exe
+```
+# -*- mode: python ; coding: utf-8 -*-
+
+
+block_cipher = None
+
+
+a = Analysis(
+    ['studentPicture.py'],
+    pathex=[],
+    binaries=[],
+    datas=[('studentPicture.ui', '.')],
+    hiddenimports=[],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+    noarchive=False,
+)
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],
+    exclude_binaries=True,
+    name='studentPicture',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    console=True,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='studentPicture',
+)
+
+```
+
+### studentCardv2.exe
+``
+# -*- mode: python ; coding: utf-8 -*-
+
+
+block_cipher = None
+
+
+a = Analysis(
+    ['studentCardv2.py'],
+    pathex=[],
+    binaries=[],
+    datas=[('studentCardv2.ui', '.'), ('omakuva2.png', '.'), ('Raseko-Logo-vaaka.png', '.')],
+    hiddenimports=[],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+    noarchive=False,
+)
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],
+    exclude_binaries=True,
+    name='studentCardv2',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    console=False,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='studentCardv2',
+)
+
+``
+
+
+
