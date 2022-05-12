@@ -63,7 +63,7 @@ PyInstaller --windowed studentCardv2.py
 ```
 Building executables creates several files to `build` folder. The executable and necessary dll files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory. It is handy to give build commands without `--windowed` argument. Then you have Python console for debugging. When everything works as expected we can edit the `.spec` file and set `console=False` in the `EXE` part of the file.
 
-⚠️ When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder in the first build of your application. If you create modules they must either reside in the `libs` folder of the virtual environment or you must add your own python modules into the `.spec` file to copy them automatically during the build process. Alfter 1st build you can edit the created `.spec` file. When you have a `.spec` file you can build with command `PyInstaller studentipicture.spec` or what ever is your build specification file.
+⚠️ When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder in the first build of your application. If you create modules they must either reside in the `libs` folder of the virtual environment or you must add your own python modules into the `.spec` file to copy them automatically during the build process. Alfter 1st build you can edit the created `.spec` file. When you have a `.spec` file you can build with command `PyInstaller studentPicture.spec` or what ever is your build specification file.
 
 File and path |	Purpose
 |---|---|
