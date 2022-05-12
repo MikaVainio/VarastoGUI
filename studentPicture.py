@@ -49,7 +49,7 @@ class App(QtWidgets.QWidget):
         super().__init__()
 
         # Load the ui file
-        uic.loadUi('StudentPotrait.ui', self)
+        uic.loadUi('StudentPicture.ui', self)
 
         # UI elements (Direct assignment to properties)
         self.picture = self.videoImage
