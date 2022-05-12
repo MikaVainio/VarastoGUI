@@ -4,7 +4,7 @@ This branch is for developping a stand alone GUI and an application for creating
 
 The GUI is designed as follows:
 
-image
+![image](https://user-images.githubusercontent.com/24242044/168024179-dd738592-da38-4d0a-9417-b1ce5f71ecee.png)
 
 The User types a student number into text edit Opiskelijanumero (1). Student information is updated to labels (9) and bar code (12) is drawn at the bottom of the white preview frame (4). This area will be printed on the physical student card. When Hae Kuva (Load picture) Button (2) is pressed the photograph of the student is shown in a label (8) which is inside a Raseko coloured frame (5). The frame is created by using Qlabel frame properties and styles. Logo (6) and some fixed information (7, 10) is allways shown on the card prewiew. Stripe (11) is coloured frame with a label. If all information and the photo is OK, user can print the card with Tulosta (Print) Button (3). When Opiskelijanumero (1) is being edited picture (8), bar code (12) and all dynamic labels (9) are cleared.
 
@@ -14,7 +14,7 @@ In the final version all font sizes should be carefully inspected. The size of t
 
 In the 2nd version all dynamic labels are bound to line edit elements by QTSignals. Singnals and slots are created graphically in the QTEditor.
 
-image
+![image](https://user-images.githubusercontent.com/24242044/168024527-d5bbd408-cdee-4e93-9e60-8cba515e9fc5.png)
 
 This branch has 3 python files and 3 ui files. Most current files are:
 
