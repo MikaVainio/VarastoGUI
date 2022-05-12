@@ -21,7 +21,7 @@ This branch has 3 python files and 3 ui files. Most current files are:
 | Library or module | Purpose |
 |---|---|
 code128Bcode.py | For generating barcodes with Libre 128 Barcode font
-studentCard.py | Applications main module, contains functions in code128Bcode.py
+studentCardv2.py | Applications main module, contains function in code128Bcode.py
 studentCardv2.ui | Current UI definitions for the app
 studentPicture.py | A small application for taking photos for the student card
 studentPicture.ui | UI for the photo taking application
@@ -33,7 +33,25 @@ Some image files are needed for logos and as placeholders.
 
 # Distribution
 
-For distributing applications we need the `PyInstaller` library. It can be installed into the virtual environment `pip install PyInstaller`. Applications for this branch use quite many external libraries so it is not vise to distiribute the application in single standalone `exe` file. With separate `dll` link libraries the file size of the exe's file size is much smaller thus there are many files in the distribution directory. When creating an application with a separate `ui` file it is essential to copy manually the `ui` file into `dist` folder. `PyInstaller` does not copy it and running the `exe` fails.
+For distributing applications we need the `PyInstaller` library. It can be installed into the virtual environment `pip install PyInstaller`. Applications for this branch use quite many external libraries so it is not vise to distiribute the application in single standalone `exe` file. With separate `dll` link libraries the file size of the exe's file size is much smaller thus there are many files in the distribution directory. When creating an application with a separate `ui` file it is essential to copy manually the `ui` file into `dist` folder. `PyInstaller` does not copy it and running the `exe` fails. When build first time the `.spec`file of build is created. Additional files can be added to the `datas` section for next time builds. The following example is from `studentCardv2.spec` Successfull build needs the ui file `studentCardv2.ui`, placeholder picture `omakuva2.png` and the logo of Raseko `Raseko-Logo-vaaka.png`. The `datas` section is a list of tupplets. A tupplet contains a filename and the destination folder in the `dist` folder. Root of the `dist` folder is`.`. 
+
+```
+a = Analysis(
+    ['studentCardv2.py'],
+    pathex=[],
+    binaries=[],
+    datas=[('studentCardv2.ui', '.'), ('omakuva2.png', '.'), ('Raseko-Logo-vaaka.png', '.')],
+    hiddenimports=[],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+    noarchive=False,
+)
+```
 
 ## Single container application 
 To create single container application run the following command `PyInstaller --onefile main.py` where the `main.py` is the name of the file containing the main window definition. This command creates a large `exe` file containing all components of the application.
@@ -42,20 +60,20 @@ To create single container application run the following command `PyInstaller --
 
 In Our case commands are:
 * `PyInstaller --windowed studentPicture.py`
-* `PyInstaller --windowed studentCard.py`
+* `PyInstaller --windowed studentCardv2.py`
 
-Building executables creates several files to `build` folder. The executable and necessary `dll` files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory.
+Building executables creates several files to `build` folder. The executable and necessary `dll` files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory. It is handy to give build commands without `--windwed` argument. Then you have Python console for debugging. When everything works as expected we can edit the `.spec` file and set `console=False` in the `EXE` part of the file.
 
-:warning: When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder. If you create modules they must reside in the libs folder of the virtual environment.
+:warning: When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder in the first build of your application. If you create modules they must reside in the libs folder of the virtual environment. Alfter 1st build you can edit the `.spec` file.
 
 | File and path| Purpose |
 |---|---|
 dist\studentPicture\studentPicture.exe | Executable to run picture taking application
 dist\studentPicture\studentPotrait.ui | Ui file manually copied to this folder
-dist\studentCard\studentCard.exe | Executable to run card printing application
-dist\studentCard\studentCardv2.ui |  Ui file manually copied to this folder
+dist\studentCardv2\studentCardv2.exe | Executable to run card printing application
+dist\studentCardv2\studentCardv2.ui |  Ui file manually copied to this folder
 studentPicture.spec | Settings for building picture taking application
-studentCard.spec | Settings for building picture taking application
+studentCardv2.spec | Settings for building picture taking application
 
 If python console is needed it can be enabled by editing `spec` file and altering `exe = EXE()` block. Change console option to `console=True`
 
