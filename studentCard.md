@@ -118,7 +118,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
@@ -201,5 +201,5 @@ Applications can be distributed with or without an installer. When used without 
 
 ![image](https://user-images.githubusercontent.com/24242044/168031298-51e47538-b4a7-4a97-9837-cc349822a9e7.png)
 
-Distribution can be made with zipped folder containinf installation instructions and contents of the distribution folder. Creating an installer is more sophisticated way of delivering the application to a client.
+Distribution can be made with zipped folder containing installation instructions and contents of the distribution folder. Creating an installer is more sophisticated way of delivering the application to a client. Free installer building application is **InstallForge**. You can load it from https://installforge.net/download/. There is a nice tutorial at https://www.pythonguis.com/tutorials/packaging-pyqt5-pyside2-applications-windows-pyinstaller/ about using `PyInstaller` and `InstallForge` It is essential to add instructions for installing **Libre Code 128** font from Goolgle. Font can be found at https://fonts.google.com/specimen/Libre+Barcode+128+Text.
 
