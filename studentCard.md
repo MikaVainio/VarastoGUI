@@ -82,6 +82,8 @@ If python console is needed it can be enabled by editing `.spec` file and alteri
 `.spec` files are ignored by git. Full build specifications are as follows:
 
 ### studentPicture.exe
+
+Build specification file `studentPicture.spec` contains instructions below:
 ```
 # -*- mode: python ; coding: utf-8 -*-
 
@@ -137,6 +139,8 @@ coll = COLLECT(
 ```
 
 ### studentCardv2.exe
+
+Build specification file `studentCardv2.spec` contains instructions below:
 
 ```
 # -*- mode: python ; coding: utf-8 -*-
