@@ -137,7 +137,8 @@ coll = COLLECT(
 ```
 
 ### studentCardv2.exe
-``
+
+```
 # -*- mode: python ; coding: utf-8 -*-
 
 
@@ -189,7 +190,7 @@ coll = COLLECT(
     name='studentCardv2',
 )
 
-``
+```
 
 
 
