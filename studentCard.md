@@ -1,4 +1,4 @@
-Studentcard
+#Studentcard
 This branch is for developping a stand alone GUI and an application for creating and printing student cards with a specialized card printer.
 
 The GUI is designed as follows:
@@ -17,19 +17,21 @@ image
 
 This branch has 3 python files and 3 ui files. Most current files are:
 
-Library or module	Purpose
-code128Bcode.py	For generating barcodes with Libre 128 Barcode font
-studentCardv2.py	Applications main module, contains function in code128Bcode.py
-studentCardv2.ui	Current UI definitions for the app
-studentPicture.py	A small application for taking photos for the student card
-studentPicture.ui	UI for the photo taking application
+| Library or module | Purpose |
+|---|---|
+code128Bcode.py |	For generating barcodes with Libre 128 Barcode font
+studentCardv2.py |	Applications main module, contains function in code128Bcode.py
+studentCardv2.ui |	Current UI definitions for the app
+studentPicture.py |	A small application for taking photos for the student card
+studentPicture.ui | UI for the photo taking application
 Some image files are needed for logos and as placeholders.
 
-Omakuva2.png -> placeholder for student photo
-Raseko-logo-vaaka.png -> The logo of our school
-Distribution
-For distributing applications we need the PyInstaller library. It can be installed into the virtual environment pip install PyInstaller. Applications for this branch use quite many external libraries so it is not vise to distiribute the application in single standalone exe file. With separate dll link libraries the file size of the exe's file size is much smaller thus there are many files in the distribution directory. When creating an application with a separate ui file it is essential to copy manually the ui file into dist folder. PyInstaller does not copy it and running the exe fails. When build first time the .specfile of build is created. Additional files can be added to the datas section for next time builds. The following example is from studentCardv2.spec Successfull build needs the ui file studentCardv2.ui, placeholder picture omakuva2.png and the logo of Raseko Raseko-Logo-vaaka.png. The datas section is a list of tupplets. A tupplet contains a filename and the destination folder in the dist folder. Root of the dist folder is..
+* Omakuva2.png -> placeholder for student photo
+* Raseko-logo-vaaka.png -> The logo of our school
 
+## Distribution
+For distributing applications we need the `PyInstaller` library. It can be installed into the virtual environment `pip install PyInstaller`. Applications for this branch use quite many external libraries so it is not vise to distiribute the application in single standalone exe file. With separate `dll` link libraries the file size of the exe's file size is much smaller thus there are many files in the distribution directory. When creating an application with a separate ui file it is essential to copy manually the ui file into dist folder. PyInstaller does not copy it and running the exe fails. When build first time the `.specfile` of build is created. Additional files can be added to the `datas` section for next time builds. The following example is from `studentCardv2.spec`. Successfull build needs the ui file studentCardv2.ui, placeholder picture omakuva2.png and the logo of Raseko Raseko-Logo-vaaka.png. The datas section is a list of tupplets. A tupplet contains a filename and the destination folder in the `dist` folder. Root of the dist folder is `.`.
+```
 a = Analysis(
     ['studentCardv2.py'],
     pathex=[],
@@ -45,25 +47,31 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
-Single container application
+```
+
+## Single container application
+
 To create single container application run the following command PyInstaller --onefile main.py where the main.py is the name of the file containing the main window definition. This command creates a large exe file containing all components of the application.
 
-Application and separate libraries
+## Application and separate libraries
 In Our case commands are:
-
+```
 PyInstaller --windowed studentPicture.py
 PyInstaller --windowed studentCardv2.py
-Building executables creates several files to build folder. The executable and necessary dll files can be found in the dist folder. Build settings can be found in a .spec file in the projects root directory. It is handy to give build commands without --windwed argument. Then you have Python console for debugging. When everything works as expected we can edit the .spec file and set console=False in the EXE part of the file.
+```
+Building executables creates several files to `build` folder. The executable and necessary dll files can be found in the `dist` folder. Build settings can be found in a `.spec` file in the projects root directory. It is handy to give build commands without `--windowed` argument. Then you have Python console for debugging. When everything works as expected we can edit the `.spec` file and set `console=False` in the `EXE` part of the file.
 
-⚠️ When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into dist folder in the first build of your application. If you create modules they must either reside in the libs folder of the virtual environment or you must add python modules into the .spec file to copy them automatically during the build process. Alfter 1st build you can edit the created .spec file. When you have a .spec file you can build with command PyInstaller studentipicture.spec or what ever is your build specification file.
+⚠️ When using QT UI recources which are not precompiled into python file you must copy resources like ui or picture files manually into `dist` folder in the first build of your application. If you create modules they must either reside in the `libs` folder of the virtual environment or you must add your own python modules into the `.spec` file to copy them automatically during the build process. Alfter 1st build you can edit the created `.spec` file. When you have a `.spec` file you can build with command `PyInstaller studentipicture.spec` or what ever is your build specification file.
 
-File and path	Purpose
-dist\studentPicture\studentPicture.exe	Executable to run picture taking application
-dist\studentPicture\studentPotrait.ui	Ui file manually copied to this folder
-dist\studentCardv2\studentCardv2.exe	Executable to run card printing application
-dist\studentCardv2\studentCardv2.ui	Ui file manually copied to this folder
-studentPicture.spec	Settings for building picture taking application
-studentCardv2.spec	Settings for building picture taking application
-If python console is needed it can be enabled by editing spec file and altering exe = EXE() block. Change console option to console=True
+File and path |	Purpose
+|---|---|
+dist\studentPicture\studentPicture.exe |	Executable to run picture taking application
+dist\studentPicture\studentPotrait.ui |	Ui file manually copied to this folder
+dist\studentCardv2\studentCardv2.exe |	Executable to run card printing application
+dist\studentCardv2\studentCardv2.ui |	Ui file manually copied to this folder
+studentPicture.spec	| Settings for building picture taking application
+studentCardv2.spec | Settings for building picture taking application
+
+If python console is needed it can be enabled by editing `.spec` file and altering `exe = EXE()` block. Change console option to `console=True`.
 
 ⚠️ Windows Defender might claim that there is a trojan in the executable. This is a known false positive. Most of computers in the school have FSecure Safe as malware detection software. It does not give any alerts concerning the executable. Defender users may find this article useful: https://python.plainenglish.io/pyinstaller-exe-false-positive-trojan-virus-resolved-b33842bd3184.
