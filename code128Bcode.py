@@ -31,15 +31,19 @@ def string2barcode(text, codeType, fontShift):
         weightedSum += bCValue * cntr # Calculate the position weighted sum
 
     chksum = weightedSum % 103 # Calculate modulo 103 checksum
+    print('varmistussumma', chksum)
 
     # Build barcode 
     startSymbol = chr(startSymbolValue + addValue) # Create a start symbol accordint ot the type
-    stopSymbol = chr(stopSymbolValue + addValue) # Create a stop symbol
-    chkSymbol = chr(chksum + 32) # Create the checksum symbol
+    stopSymbol = chr(stopSymbolValue + addValue) # Create a stop symbol 
+    if chksum < 95:
+        chkSymbol = chr(chksum + 32) # Create the checksum symbol
+    else:
+        chkSymbol = chr(chksum + addValue)
     barCode = startSymbol + stringToCode + chkSymbol + stopSymbol
     return barCode
     
 
 if __name__ == '__main__':
-    bc = string2barcode('Hello', 'B', 'common')
+    bc = string2barcode('A-0040-Z', 'B', 'common')
     print('Viivakoodi on', bc)
