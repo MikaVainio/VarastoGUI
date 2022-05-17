@@ -57,7 +57,7 @@
     <string>Tulosta</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="studentName">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -72,7 +72,7 @@
     </font>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="dateOfBirth">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -126,7 +126,7 @@
     <string>Syntymäaika</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
+  <widget class="QLineEdit" name="studyName">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -141,7 +141,7 @@
     </font>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_5">
+  <widget class="QLineEdit" name="season">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -198,17 +198,26 @@
    <widget class="QLabel" name="studentBarcode">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>740</y>
-      <width>331</width>
-      <height>111</height>
+      <x>50</x>
+      <y>760</y>
+      <width>441</width>
+      <height>131</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Libre Barcode 128</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string/>
+     <string>ÌJonne^Î</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="logoLabel">
@@ -662,12 +671,15 @@ color: rgb(237, 46, 128);</string>
      <pointsize>14</pointsize>
     </font>
    </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>lineEdit_2</sender>
+   <sender>studentName</sender>
    <signal>textChanged(QString)</signal>
    <receiver>nameLabel</receiver>
    <slot>setText(QString)</slot>
@@ -683,7 +695,7 @@ color: rgb(237, 46, 128);</string>
    </hints>
   </connection>
   <connection>
-   <sender>lineEdit_3</sender>
+   <sender>dateOfBirth</sender>
    <signal>textChanged(QString)</signal>
    <receiver>birthLabel</receiver>
    <slot>setText(QString)</slot>
@@ -699,7 +711,7 @@ color: rgb(237, 46, 128);</string>
    </hints>
   </connection>
   <connection>
-   <sender>lineEdit_4</sender>
+   <sender>studyName</sender>
    <signal>textChanged(QString)</signal>
    <receiver>courseLabel</receiver>
    <slot>setText(QString)</slot>
@@ -715,7 +727,7 @@ color: rgb(237, 46, 128);</string>
    </hints>
   </connection>
   <connection>
-   <sender>lineEdit_5</sender>
+   <sender>season</sender>
    <signal>textChanged(QString)</signal>
    <receiver>semesterLabel</receiver>
    <slot>setText(QString)</slot>
