@@ -9,7 +9,8 @@ videoWidgedv2.ui | QT Design for UI with single window for both UI and video
 widgedGui.py | UI uses a separate Window to show the videostream
 singleWindowGui.py | The videostream is shown directly in QT UI and video processing is done in a separate thread
 photo.py | Functions to handle videostream and adding view finder to stream
-productBarcode.py | Routines for creating SVG or PNG bar codes. Supports Code 128 and EAN codes
+productBarcode.py | Routines for creating SVG or PNG bar codes. Supports Code 128 and EAN codes (to be removed use barcode font instead)
+settings.dat | Preferences for the app. At the moment contains only web camera index
 
 ## Production code
 The UI for taking product pictures is ultimatelly implemented in `singleWindowGui.py` file and layout of the UI can be found in `videoWidgedv2.ui` file.
