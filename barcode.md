@@ -18,3 +18,4 @@ When using a wand like USB barcode reader device user must set reader to use nat
 
 
 
+
