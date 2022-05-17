@@ -16,9 +16,4 @@ def test_string2Bcode():
     # Capital, small letters and numbers
     assert code128Bcode.string2barcode('Kotu-12345') == 'ÌKotu-12345tÎ'
 
-    # Checksum 0
-
-    # Checksum < 95
-
-    # Checksum >= 95
     
