@@ -1,5 +1,5 @@
 
-def string2barcode(text, codeType, fontShift):
+def string2barcode(text, codeType='B', fontShift='common'):
     """Generates a Code 128 barcode from given text string. For Libre 128 barcode font
     Args:
         text (str): The text to be encoded into a barcode
@@ -48,5 +48,5 @@ def string2barcode(text, codeType, fontShift):
     
 
 if __name__ == '__main__':
-    bc = string2barcode('A-0040-Z', 'B', 'common')
+    bc = string2barcode('Kotu-12345', 'B', 'common')
     print('Viivakoodi on', bc)
