@@ -1,6 +1,7 @@
 # EXAMPLE OF QT APPICATION FOR TAKING PRODUCT IMAGES IN SEPARATE THREAD USING WEB CAMERA
 
 # LIBRARIES AND MODULES
+# TODO:Remove unnecessary libraries and change the barcode library to DIY module
 import json # For saving settings in JSON format
 import productBarcode
 import cv2 # For OpenCV video and picture manipulation
