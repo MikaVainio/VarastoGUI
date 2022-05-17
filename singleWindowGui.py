@@ -24,11 +24,10 @@ class VideoThread(QThread):
     def run(self):
 
         # Create a videocapture object and set capture dimensions to 1280 x 720
-        # TODO: followind parameters of the camera must be read from preferences or fields of the UI
         file = open('settings.dat', 'r') # Read all settings from the settings file
         settings = json.load(file)
         file.close()
-        camIx = settings.get('camIx')
+        camIx = settings.get('camIx') # Get the camIX
         videoStream = cv2.VideoCapture(camIx, cv2.CAP_DSHOW)
         videoStream.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         videoStream.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -58,6 +57,7 @@ class App(QtWidgets.QWidget):
         # Read the settings file
         self.settingsFile = open('settings.dat', 'r') # Read all settings from the settings file
         self.settings = json.load(self.settingsFile)
+
         # UI elements (Direct assignment to properties)
         self.picture = self.productImage
         self.productCode = self.productId
@@ -66,12 +66,12 @@ class App(QtWidgets.QWidget):
         self.barCode = self.bcLabel
 
         # Set the intial values and properties of UI elements
-        self.captureButton.setEnabled(True)
-        self.saveToDbButton.setEnabled(False)
-        self.initCamIx = self.settings.get('camIx')
-        self.camera.setValue(self.initCamIx)
+        self.captureButton.setEnabled(True) # Enable capture button 
+        self.saveToDbButton.setEnabled(False) # Disable save to db button
+        self.initCamIx = self.settings.get('camIx') # Read the camIx from settings
+        self.camera.setValue(self.initCamIx) # Set the initial value for camIx spinner
 
-        # Set Camera index by spinbox
+        # Set Camera index by spinbox when changed
         self.camera.valueChanged.connect(self.setCamIx)
         
         # Start Capture button signal to capture slot -> call capture function
