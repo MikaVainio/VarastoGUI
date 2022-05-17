@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>935</width>
+    <width>1073</width>
     <height>582</height>
    </rect>
   </property>
@@ -321,6 +321,34 @@
    </property>
    <property name="text">
     <string>Tallenna</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="cameraIxSpinBox">
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>30</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>10</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Kameran numero</string>
    </property>
   </widget>
  </widget>

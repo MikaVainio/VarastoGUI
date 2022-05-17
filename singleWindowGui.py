@@ -1,9 +1,12 @@
 # EXAMPLE OF QT APPICATION FOR TAKING PRODUCT IMAGES IN SEPARATE THREAD USING WEB CAMERA
 
 # LIBRARIES AND MODULES
+import json # For saving settings in JSON format
 import productBarcode
 import cv2 # For OpenCV video and picture manipulation
 import sys # For accessing system parameters
+import os # For accessing environment variables
+from dotenv import load_dotenv # For storing env. variables inside a project in the .env file
 from PyQt5 import QtWidgets, uic # For the UI
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot # For creating multiple threads and signaling between UI and Video thread
 from PyQt5.QtCore import Qt # For image scaling
@@ -22,7 +25,11 @@ class VideoThread(QThread):
 
         # Create a videocapture object and set capture dimensions to 1280 x 720
         # TODO: followind parameters of the camera must be read from preferences or fields of the UI
-        videoStream = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+        file = open('settings.dat', 'r') # Read all settings from the settings file
+        settings = json.load(file)
+        file.close()
+        camIx = settings.get('camIx')
+        videoStream = cv2.VideoCapture(camIx, cv2.CAP_DSHOW)
         videoStream.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         videoStream.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
@@ -40,6 +47,7 @@ class VideoThread(QThread):
 
 # APPLICATION CLASS FOR THE UI
 class App(QtWidgets.QWidget):
+
     # CONSTRUCTOR
     def __init__(self):
         super().__init__()
@@ -47,14 +55,24 @@ class App(QtWidgets.QWidget):
         # Load the ui file
         uic.loadUi('videoWidgetv2.ui', self)
 
+        # Read the settings file
+        self.settingsFile = open('settings.dat', 'r') # Read all settings from the settings file
+        self.settings = json.load(self.settingsFile)
         # UI elements (Direct assignment to properties)
         self.picture = self.productImage
         self.productCode = self.productId
-        # self.camera = self.cameraIxSpinBox
+        self.camera = self.cameraIxSpinBox
         self.preview = self.catalogPreview
         self.barCode = self.bcLabel
+
+        # Set the intial values and properties of UI elements
         self.captureButton.setEnabled(True)
         self.saveToDbButton.setEnabled(False)
+        self.initCamIx = self.settings.get('camIx')
+        self.camera.setValue(self.initCamIx)
+
+        # Set Camera index by spinbox
+        self.camera.valueChanged.connect(self.setCamIx)
         
         # Start Capture button signal to capture slot -> call capture function
         self.captureButton.clicked.connect(self.capture)
@@ -69,9 +87,17 @@ class App(QtWidgets.QWidget):
     # SLOTS
 
     # Set the camera index
-    '''def setCamIx(self):
-        camIx = self.camera.value()
-        print(camIx)'''
+    def setCamIx(self):
+        camIx = self.camera.value() # Read the value of the spinner
+        file = open('settings.dat', 'r') # Read all settings from the settings file
+        settings = json.load(file)
+        file.close()
+        settings['camIx'] = camIx # Set the index value
+        print(settings.get('camIx'))
+        file = open('settings.dat', 'w') # Save settings
+        json.dump(settings, file)
+        file.close()
+        
 
     # Capture video: started by signal from captureButton
     def capture(self):
