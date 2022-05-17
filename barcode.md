@@ -14,7 +14,7 @@ string2barcode('Kotu-12345', 'B', 'common')
 string2barcode('Kotu-12345')
 
 ```
-
+When using a wand like USB barcode reader device user must set reader to use national characters (Zebex Z 3100: Suomenkieliset merkit). This setting is made with a barcode on the leaflet found in the packade of the wand. Codes for progrmanning the wand can also be found on the manufacturers web site https://www.zebex.com/en/support/download/?tid=0&pid=10.
 
 
 
