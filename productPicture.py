@@ -26,7 +26,7 @@ class VideoThread(QThread):
 
         # Create a videocapture object and set capture dimensions to 1280 x 720
         file = open('settings.dat', 'r') # Read all settings from the settings file
-        settings = json.load(file)
+        settings = json.load(file) # Create a dictionary from JSON data
         file.close()
         camIx = settings.get('camIx') # Get the camIX
         videoStream = cv2.VideoCapture(camIx, cv2.CAP_DSHOW)
@@ -57,7 +57,7 @@ class App(QtWidgets.QWidget):
 
         # Read the settings file
         self.settingsFile = open('settings.dat', 'r') # Read all settings from the settings file
-        self.settings = json.load(self.settingsFile)
+        self.settings = json.load(self.settingsFile) # Dreate a dict fron JSON data
 
         # UI elements (Direct assignment to properties)
         self.picture = self.productImage
