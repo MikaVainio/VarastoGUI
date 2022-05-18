@@ -1,34 +1,21 @@
 # Barcode branch
 
-This branch is for developping tools for creating, showing and printing barcodes in the app. Basict barcode functionality is based on `python-barcode 0.13.1`. This shold be installed with pip prior using functions from the module `productBarcode.py`. Python-barcode is depending on `pillow` imaging library.  
+This branch is for developping tools to create, show and print barcodes in the app. Due to design flaws in the previously used Python-barcode library a new custom made module was created. At the moment all barcodes are created with **Libre Code128 barcode** font. Module creates appropriate letters for the font and calculates the checksum needed by the wands verifying algorithm. Module contains a single function `string2barcode()` to create a string for the barcode font. All three variations of the Code128 (A, B and C) are supported. User can also choose how letters are chosen according to 3 differenc schemes: common, uncommon or barcodesoft. For more information check the following article https://en.wikipedia.org/wiki/Code_128. 
 
-## Installing dependencies
+## Generating barcodes
+`string2barcode()` function defauts to code128 B type of barcode using common character set.
+The function can be used as follows:
 
-First update pip in the virtual environment. Type `pip install --upgrade pip` You might to do this twice due to a permission error.
-`python-barcode 0.13.1` installation can be made to virtual environment by typing `pip install python-barcode` in the terminal. `pillow 9.1.0` can be installed by typing `pip install pillow` or typing `pip install --upgrade pillow`.
+```Python
+# With all arguments
+string2barcode('Kotu-12345', 'B', 'common')
 
-## Modules
+# Or with a single argument
+string2barcode('Kotu-12345')
 
-The branch contains a single module with 2 functions to produce EAN or Code 128 barcodes.
-Barcodes are SVG or PNG objects that have save() method for outputting files:
-
-* barCode2Image creates barcode image from product ID or any legal EAN or Code 128 string.  
-* setWriterOptions sets barcode dimensions
-
-```python
-# Using functions
-
-# Set Writer options. A dictionary for the writer: height 5 mm, text 1 mm from barcode, fontsize 12
-writerOptions = setWriterOptions(5,1,12)
-
-# Product ID to encode
-productid = 'Kotu-12345'
-codeType = 'Code128'
-pictureType = 'PNG'
-
-# Create Code 128 barcode as png file
-barCode = barCode2Image(productid, codeType, pictureType)
-
-# Save it to a file with defined dimensios. Do not use extensions in names
-barCode.save('Barcode', writerOptions)
 ```
+When using a wand like USB barcode reader device user must set reader to use national characters (Zebex Z 3100: Suomenkieliset merkit). This setting is made with a barcode on the leaflet found in the packade of the wand. Codes for progrmanning the wand can also be found on the manufacturers web site https://www.zebex.com/en/support/download/?tid=0&pid=10.
+
+
+
+
