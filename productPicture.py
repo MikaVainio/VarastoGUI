@@ -53,7 +53,7 @@ class App(QtWidgets.QWidget):
         super().__init__()
 
         # Load the ui file
-        uic.loadUi('videoWidgetv2.ui', self)
+        uic.loadUi('productPicture.ui', self)
 
         # Read the settings file
         self.settingsFile = open('settings.dat', 'r') # Read all settings from the settings file
